@@ -250,7 +250,7 @@ class AcademiaApplicationTests {
     }
 
     /**
-     *  20. Devuelve el cuanto se ingresaría por el curso de 'Desarrollo Backend con Java' si todo el cupo
+     *  20. Devuelve cuánto se ingresaría por el curso de 'Desarrollo Backend con Java' si todo el cupo
      *  de alumnos estuviera matriculdo.
      */
     @Test
