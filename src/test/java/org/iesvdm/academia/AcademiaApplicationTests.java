@@ -139,11 +139,7 @@ class AcademiaApplicationTests {
      */
     @Test
     void test5() {
-         String apellido = "Martín";
-
         List<Alumno> alumnos = alumnoRepository.findAll();
-
-
 
     }
 
@@ -240,22 +236,17 @@ class AcademiaApplicationTests {
 
         List<Matricula> matriculas = matriculaRepository.findAll();
 
-        double[] minMax = matriculas.stream()
-                .map(Matricula::getNotaFinal)
-                .reduce(new double[]{Double.MAX_VALUE, Double.MIN_VALUE},
-                        (a, b) -> new double[]{
-                                Math.min(a[0], b),
-                                Math.max(a[1], b)
-                        },
-                        (a1, a2) -> new double[]{
-                                Math.min(a1[0], a2[0]),
-                                Math.max(a1[1], a2[1])
-                        });
+        OptionalDouble minNota = matriculas.stream()
+                .mapToDouble(Matricula::getNotaFinal)
+                .min();
 
-        System.out.println("Mínimo total de pedido: " + minMax[0]);
-        System.out.println("Máximo total de pedido: " + minMax[1]);
-
+        if (minNota.isPresent()) {
+            System.out.println("La mínima nota obtenida es: " + minNota.getAsDouble());
+        } else {
+            System.out.println("No hay notas disponibles.");
+        }
     }
+
     /**
      *  11. Devuelve un listado de los cursos que empiecen por A y terminen por t,
      *  y también los cursos que terminen por x.
